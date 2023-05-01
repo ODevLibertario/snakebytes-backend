@@ -15,7 +15,7 @@ require('dotenv').config()
 const app = express();
 
 const options = {
-    origin: 'http://localhost:4200',
+    origin: ['http://localhost:4200', 'https://snakebytes.onrender.com'],
 }
 app.use(cors(options))
 
