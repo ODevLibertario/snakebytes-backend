@@ -127,6 +127,12 @@ app.post('/addToken', (req: any, res) => {
 
 })
 
+app.get('/deleteUser', (req: any, res) => {
+    RedisClientSingleton.Instance().deleteUser(req.query.username, req.query.pubKeyHash).then(result => {
+        res.send({message: 'Success'})
+    }).catch(e => res.status(500).send({message: e}))
+})
+
 app.get('/prize', (req: any, res) => {
     RedisClientSingleton.Instance().client.get("prize").then(prize => {
         res.send(JSON.parse(prize))

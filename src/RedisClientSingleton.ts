@@ -1,6 +1,7 @@
 import {RedisClientType} from "redis";
 import {enums} from "openpgp";
 import publicKey = enums.publicKey;
+import sha256 from "sha256";
 
 export class RedisClientSingleton {
     private static _instance: RedisClientSingleton;
@@ -20,6 +21,15 @@ export class RedisClientSingleton {
     public userExists(username: string): Promise<boolean> {
         return this.client.get("users."+username).then(result => {
             return result != null
+        })
+    }
+
+    public deleteUser(username: string, pubKeyHash: string): Promise<any> {
+        return this.client.get("users."+username).then(result => {
+            if(pubKeyHash == sha256(result)){
+                return this.client.del("users."+username)
+            }
+            throw "Invalid user"
         })
     }
 
