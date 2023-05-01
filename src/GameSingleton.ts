@@ -1,6 +1,6 @@
 import {RedisClientType} from "redis";
 
-const MOVEMENT_DELAY = 150;
+const MOVEMENT_DELAY = 90;
 const SCORE_INCREMENT = 100;
 
 
