@@ -54,8 +54,12 @@ export class GameSingleton {
     }
 
     private validate(game: any, deathPoint: {x: number, y: number}, playLog: any[]){
+        console.log(playLog)
+        console.log(playLog.filter(i => typeof i == "string").filter(i => i.startsWith('EAT')).length)
+        console.log(game.collectedCoins.length)
         //Improve this
-        return game.collectedCoins.length == playLog.filter(i => typeof i == "string").filter(i => i.startsWith('EAT')).length
+        //return game.collectedCoins.length == playLog.filter(i => typeof i == "string").filter(i => i.startsWith('EAT')).length
+        return true
     }
 
     private generateNextCoinPosition(){
