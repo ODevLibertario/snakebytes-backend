@@ -68,8 +68,9 @@ export class RedisClientSingleton {
         return this.getLeaderboard().then(leaderboard => {
             if(leaderboard && leaderboard[0]){
                 let username = leaderboard[0].username
+                let score = leaderboard[0].score
                 return this.getPublicKey(username).then(publicKey => {
-                    return {username, publicKey}
+                    return {username, score, publicKey}
                 })
             }else {
                 return null

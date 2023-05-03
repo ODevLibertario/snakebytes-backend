@@ -145,6 +145,7 @@ schedule.scheduleJob('pay-the-prize','0 9 * * *', 'UTC', () => {
     console.log('Calculating prize')
     RedisClientSingleton.Instance().getLeader().then(leader => {
         if(leader) {
+            console.log(`Winner: ${leader}`)
             RedisClientSingleton.Instance().consumeToken().then(async token => {
                 const publicKey = await openpgp.readKey({armoredKey: leader.publicKey});
                 const encrypted = await openpgp.encrypt({
