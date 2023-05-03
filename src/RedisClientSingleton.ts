@@ -80,7 +80,9 @@ export class RedisClientSingleton {
 
     public consumeToken(){
         return this.client.keys("tokens.*").then(tokenKeys => {
-            return this.client.get(tokenKeys[0]).then(existingToken => {
+            let specialKey = tokenKeys.find(t => "tokens.500")
+
+            return this.client.get(specialKey ? specialKey : tokenKeys[0]).then(existingToken => {
                 return this.client.del(tokenKeys[0]).then(r => {
                     return existingToken
                 })
