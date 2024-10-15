@@ -1,0 +1,14 @@
+version: '3.8'  # Specify the Docker Compose version
+
+services:
+  redis:
+    image: "redis:latest"  # Use the official Redis image
+    container_name: redis_container  # Name of the container
+    ports:
+      - "6379:6379"  # Expose the default Redis port
+    volumes:
+      - redis_data:/data  # Persist Redis data on the host
+
+volumes:
+  redis_data:
+    driver: local  # Use local storage for persistence
